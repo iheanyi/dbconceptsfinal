@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+session_start();
+ERROR_REPORTING(E_ALL);
+?>
+
+
 <html>
   <head>
     <title>Sports Database Center</title>
@@ -15,21 +21,54 @@
 			  <li class="active">
 			    <a href="#">Home</a>
 			  </li>
-			  <li><a href="#">Sports</a></li>
-			  <li><a href="#">Teams</a></li>
-			  <li><a href="#">Sports</a></li>
+
+			  <li class="dropdown">
+			   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				Divisions 
+			  <b class="caret"></b>
+			</a>
+			  <ul class="dropdown-menu">
+			    	<li><a href="#">Atlantic Coast</a></li>
+				<li><a href="#">Big 12</a></li>
+				<li><a href="#">Big East</a></li>
+				<li><a href="#">Big Ten</a></li>
+				<li><a href="#">Conference USA</a></li>
+				<li><a href="#">Independents (FBS)</a></li>
+				<li><a href="#">Mid-American</a></li>
+				<li><a href="#">Mountain West</a></li>
+				<li><a href="#">Pacific-12</a></li>
+				<li><a href="#">Southeastern</a></li>
+				<li><a href="#">Sun Belt</a></li>
+				<li><a href="#">Western Athletic</a></li>
+			  </ul>
+
+			  </li>
+			  <li><a href="#teams">Teams</a></li>
+			  <li><a href="#">Administrator</a></li>
 			</ul>
 			</div>
 
 			<div class="span5">
-				<form class="form-inline" action="login.php">
-					<input type="text" class="input-small" placeholder="Email">
-					<input type="password" class="input-small" placeholder="Password">
+				<?php
+
+				if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
+				echo '
+				<form class="form-inline" action="userconnect.php" method="post">
+					<input type="text" class="input-small" placeholder="Username" name="user">
+					<input type="password" class="input-small" placeholder="Password" name="pwd">
 					<label class="checkbox">
-						<input type="checkbox"> Remember me
+						<input type="checkbox" name="cookie"> Remember me
 					</label>
 					<button type="submit" class="btn">Sign in</button>
-				</form>
+				</form>';
+				}
+
+				else {
+				
+				echo "<p class = 'clearfix small' align='right'> Welcome, " .  $_SESSION['user'] . "</p>";
+
+				}
+				?>
 			</div>
 		</div>
 
@@ -37,16 +76,47 @@
   		<div class="row">
 		<div class="hero-unit">
 		  <h1>Welcome to Our Project</h1>
-		  <p>Welcome to our Database Concepts Final Project, a program for querying data of your favorite sports team! Whether it's watching the Irish kick some ass or watching your favorite NFL team, we got it here! Hopefully you are ready for this, because it's jsut going to get better!</p>
+		  <p>Welcome to our Databases Final Project, which consists of Iheanyi Ekechukwu, Alvin Hu, Taylor Seale, and 				Ryan Shea. Our database consists of college football teams and their results from this previous season, 			which will future allow you to compare them to one another.</p>
 		  <p>
-		    <a class="btn btn-primary btn-large">
-		      Get Started Here!
-		    </a>
+
+			<?php
+			if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
+				echo '  <a class="btn btn-primary btn-large" href="login.php">
+		      			Login here!
+		    		</a>';
+			}
+
+			else {
+			echo '      <div class="btn-group">
+					<a class="btn btn-primary btn-large dropdown-toggle" data-toggle="dropdown" href="#">
+					    What next?
+					    <span class="caret"></span>
+					</a>
+
+					<ul class="dropdown-menu">
+						<li><a href="#">Manual Query</a></li>
+						<li><a href="#">Query By Division</a></li>
+						<li><a href="#">Query By Conference</a></li>
+						<li><a href="#">Compare Two Teams</a></li>
+						<li class="divider"></li>
+						<li class="dropdown-submenu">
+						<a tabindex="-1" href="#">Admin Options</a>
+						<ul class="dropdown-menu">
+
+						</ul>
+						</li>
+				   	</div>';
+								}
+			?>
+		 
 		  </p>
 		</div>
 		</div>
 
-		<div class="row">
+		<div class="row" id="teams">
+			<div class>
+
+			</div>
 
 
 		</div>
