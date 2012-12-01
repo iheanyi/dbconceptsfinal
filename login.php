@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,14 +56,19 @@
 			<div class="row">
 				<div class="login-form">
 					<h2>Login</h2>
-					<form action="">
+					<form action="userconnect.php" method="post">
 						<fieldset>
 							<div class="clearfix">
-								<input type="text" placeholder="Username">
+								<input type="text" placeholder="Username" name="user">
 							</div>
 							<div class="clearfix">
-								<input type="password" placeholder="Password">
+								<input type="password" placeholder="Password" name="pwd">
 							</div>
+
+							<div class="clearfix">
+							<label class="checkbox">
+								<input type="checkbox" name="cookie"> Remember me
+							</label>							
 							<button class="btn btn-primary" type="submit">Sign in</button>
 						</fieldset>
 					</form>
